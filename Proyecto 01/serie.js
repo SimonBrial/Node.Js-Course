@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 
-let creaSerie = () => {
+let creaSerie = (cantidad) => {
 
     return new Promise((resolve, reject) => {
         let fibo1 = 1;
@@ -14,7 +14,7 @@ let creaSerie = () => {
 
         console.log(`${fibo1}`);
 
-        for(let i=2; i<=7; i++) {
+        for(let i=2; i<=cantidad; i++) {
             serie += `${fibo2}\t`;
             fibo2 = fibo1 + fibo2;
             fibo1 = fibo2 - fibo1;
