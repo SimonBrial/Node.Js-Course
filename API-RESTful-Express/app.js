@@ -1,9 +1,28 @@
+const inicioDebug = require('debug')('app:inicio');
+const DbDebug = require('debug')('app:db');
 const express = require('express');
+const config = require('config');
 const { PORT } = require('./config');
+const morgan = require('morgan');
 const Joi = require('@hapi/joi');
 const app = express();
 
 app.use(express.json());
+
+// Configuracion de entornos
+console.log('Aplicacion ' + config.get('nombre'));
+console.log('BD server: ' + config.get('configDB.host'))
+
+// Uso de un middleware de tercero - Morgan
+if(app.get('env') === 'development') {
+    app.use(morgan('tiny'));
+    //console.log('Morgan habilitado');
+    inicioDebug('Morgan esta habilitado');
+}
+
+// Trabajos con la DB
+DbDebug('conectaando con la DB');
+
 
 const users = [
     {id:1, nombre: 'Simon'},

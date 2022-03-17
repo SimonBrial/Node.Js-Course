@@ -12,7 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "express": "^4.17.3"
+    "config": "^3.3.7",
+    "debug": "^4.3.3",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "dotenv": "^16.0.0"
