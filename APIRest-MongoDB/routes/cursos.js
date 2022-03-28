@@ -1,8 +1,9 @@
 const express = require('express');
 const Curso = require('../models/cursos.model');
+const verificarToken = require('../middlewares/auth');
 const ruta = express.Router();
 
-ruta.get('/', (req, res) => {
+ruta.get('/', verificarToken, (req, res) => {
     let resultado = listarCursosActivos();
     resultado
         .then(cursos => {
@@ -11,7 +12,7 @@ ruta.get('/', (req, res) => {
         .catch(err => res.state(400).json(err));
 });
 
-ruta.post('/', (req, res) => {
+ruta.post('/', verificarToken, (req, res) => {
     let resultado = crearCurso(req.body);
 
     resultado
@@ -19,14 +20,14 @@ ruta.post('/', (req, res) => {
         .catch(err => { res.status(400).json({ err })})
 });
 
-ruta.put('/:id', (req, res) => {
+ruta.put('/:id', verificarToken, (req, res) => {
     let resultado = actualizarCurso(req.params.id, req.body);
     resultado
         .then(curso => { res.json(curso) })
         .catch(err => { res.status(400).json(err) });
 });
 
-ruta.delete('/:id', (req, res) => {
+ruta.delete('/:id', verificarToken, (req, res) => {
     let resultado = desactivarCurso(req.params.id);
     resultado
         .then(curso => { res.json(curso)})
